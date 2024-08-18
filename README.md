@@ -21,4 +21,4 @@
 # 致谢
 本工具灵感来自[绘纹啊](https://www.bilibili.com/video/BV1TqpoesEe8)
 
-参考了[恶俗硬汉](https://space.bilibili.com/393111255)的定位代码
+参考了[恶俗硬汉](https://www.bilibili.com/video/BV1UT421a76A)的定位代码
