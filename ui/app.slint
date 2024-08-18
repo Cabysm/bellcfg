@@ -1,0 +1,150 @@
+import { Button, VerticalBox, SpinBox, HorizontalBox, TextEdit, LineEdit, TabWidget } from "std-widgets.slint";
+    
+
+export component App inherits Window {
+    icon: @image-url("./static/bell.png");
+    title: "bellcfg-cs";
+    height: 750px;
+    width: 750px;
+    property <float> yaw1: (-y1.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> yaw2: (-y2.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> yaw3: (-y3.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> yaw4: (-y4.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> yaw5: (-y5.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> pitch1: (p1.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> pitch2: (p2.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> pitch3: (p3.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> pitch4: (p4.text.to-float()) / (sens.text.to-float() * 0.022);
+    property <float> pitch5: (p5.text.to-float()) / (sens.text.to-float() * 0.022);
+    in property <string> inputs:input.text;
+    in property <string> outputs;
+    callback generate();
+    TabWidget {
+        Tab {
+            title: "定位";
+            VerticalLayout {
+                spacing: 5px;
+                Rectangle {
+                    height: 25px;
+                    Text {
+                        x: 0;
+                        text: "钟位:";
+                        font-size: 13px;
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 5px;
+                    VerticalLayout {
+                        spacing: 5px;
+                        p1 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+
+                        y1 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+                    }
+
+                    VerticalLayout {
+                        spacing: 5px;
+                        p2 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+
+                        y2 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+                    }
+
+                    VerticalLayout {
+                        spacing: 5px;
+                        p3 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+
+                        y3 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 5px;
+                    VerticalLayout {
+                        spacing: 5px;
+                        width: 33%;
+                        p4 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+
+                        y4 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+                    }
+
+                    VerticalLayout {
+                        spacing: 5px;
+                        width: 33%;
+                        p5 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+
+                        y5 := LineEdit {
+                            placeholder-text: 0;
+                            input-type: decimal;
+                        }
+                    }
+
+                    VerticalLayout {
+                        spacing: 5px;
+                        Text {
+                            text: "灵敏度";
+                            font-size: 13px;
+                        }
+
+                        sens := LineEdit {
+                            placeholder-text: 1;
+                            input-type: decimal;
+                        }
+                    }
+                }
+
+                TextEdit {
+                    text: "//Made by space.bilibili.com/9832924 \n\nalias p0 \"pitch 10099999999999 1 1 \";\nalias y0 \"yaw 10099999999999 1 1 \";\nalias p1 \"pitch " + pitch1 + " 1 1 \";\nalias y1 \"yaw " + yaw1 + " 1 1 \";\nalias p2 \"pitch " + pitch2 + " 1 1 \";\nalias y2 \"yaw " + yaw2 + " 1 1 \";\nalias p3 \"pitch " + pitch3 + " 1 1 \";\nalias y3 \"yaw " + yaw3 + " 1 1 \";\nalias p4 \"pitch " + pitch4 + " 1 1 \";\nalias y4 \"yaw " + yaw4 + " 1 1 \";\nalias p5 \"pitch " + pitch5 + " 1 1 \";\nalias y5 \"yaw " + yaw5 + " 1 1 \";\n\nalias +ang1 \"ang0;+attack;-attack;\"\nalias +ang2 \"ang0;+attack;-attack;\"\nalias +ang3 \"ang0;+attack;-attack;\"\nalias +ang4 \"ang0;+attack;-attack;\"\nalias +ang5 \"ang0;+attack;-attack;\"\nalias -ang1 \"p1;y1;\";\nalias -ang2 \"p2;y2;\";\nalias -ang3 \"p3;y3;\";\nalias -ang4 \"p4;y4;\";\nalias -ang5 \"p5;y5;\";\nalias ang0 \"p0;y0;\"\n\nbind F1 +ang1\nbind F2 +ang2\nbind F3 +ang3\nbind F4 +ang4\nbind F5 +ang5\nbind mouse_x yaw;\nbind mouse_y pitch;";
+                }
+            }
+        }
+
+        Tab {
+            title: "旋律";
+            VerticalLayout {
+                HorizontalLayout {
+                    input := LineEdit {
+                        placeholder-text: "1 1 4 5 1 4";
+                    }
+
+                    Button {
+                        text: "生成";
+                        clicked => {
+                            root.generate()
+                        }
+                    }
+                }
+
+                output := TextEdit {
+                    text: outputs;
+                }
+            }
+        }
+    }
+}
