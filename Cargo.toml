@@ -1,0 +1,10 @@
+[package]
+name = "calcs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+slint = { version = "1.7.2",  default-features = false, features = ["compat-1-2", "backend-winit", "renderer-skia"] }
+
+[build-dependencies]
+slint-build = "1.7.2"
